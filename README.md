@@ -8,21 +8,21 @@ Python 3.9+ with numpy, pandas, matplotlib (`pip install numpy pandas matplotlib
 ## Run everything
 Windows: double-click `run_all.bat`. Other systems, from this folder:
 ```
-cd code && python calibrate.py && python certify.py && python simulate.py && python plot.py
-cd double_integrator && python di_run.py && python di_plot.py
-cd ../.. && python make_tables.py
+python calibrate.py && python certify.py && python simulate.py && python plot.py
+python di_run.py && python di_plot.py
+python make_tables.py
 ```
-Total runtime about one minute on a laptop.
+Total runtime about one minute on a laptop. LaTeX tables are written to `tables/`.
 
 ## Contents
 | File | Purpose |
 |---|---|
-| `code/model.py` | Vehicle-following plant, risk functional, nominal ACC, proposed supervisor, CBF-QP baselines |
-| `code/calibrate.py` | Calibration from 3000 independent nominal-driving episodes -> `calibration.json` |
-| `code/certify.py` | Boundary check of the theorem hypotheses on a dense grid -> `certificate.json` |
-| `code/simulate.py` | Deterministic braking scenario + 1000-run random and adversarial Monte Carlo -> `simulation_summary.json`, CSVs |
-| `code/plot.py` | Vehicle figures |
-| `code/double_integrator/` | Double-integrator example: closed-form certificate, grid cross-check, Monte Carlo, figures |
+| `model.py` | Vehicle following: plant, risk functional, nominal ACC, proposed supervisor, CBF-QP baselines |
+| `calibrate.py` | Calibration from 3000 independent nominal-driving episodes -> `calibration.json` |
+| `certify.py` | Dense-grid check of the theorem hypotheses on the boundary -> `certificate.json` |
+| `simulate.py` | Braking scenario + 1000-run random and adversarial Monte Carlo -> `simulation_summary.json`, CSVs |
+| `plot.py` | Vehicle figures (`fig_*.pdf`) |
+| `di_model.py`, `di_run.py`, `di_plot.py` | Double integrator: closed-form certificate, grid cross-check, Monte Carlo, figures (`di_*`, `fig_di_*`) |
 | `make_tables.py` | Writes the LaTeX tables directly from the JSON results |
 
 ## Settings

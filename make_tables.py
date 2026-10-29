@@ -1,9 +1,9 @@
-"""Writes latex/tables_*.tex directly from the JSON results, so every number in the
+"""Writes tables/tables_*.tex directly from the JSON results, so every number in the
 tables is machine-copied (no hand typing). Run after the simulations:
-   python make_tables.py      (from the IEEE_Access_submission folder)"""
+   python make_tables.py      (flat repository layout)"""
 import json, os
 HERE = os.path.dirname(os.path.abspath(__file__))
-C = os.path.join(HERE, "code"); L = os.path.join(HERE, "latex")
+C = HERE; L = os.path.join(HERE, "tables"); os.makedirs(L, exist_ok=True)
 def j(p): return json.load(open(p))
 def sci(x, d=2):
     if x == 0: return "0"
@@ -12,7 +12,7 @@ def sci(x, d=2):
 def fx(x, d=3): return f"{x:.{d}f}"
 def vi(e):  return f"{e['violations']}"
 
-di = j(os.path.join(C, "double_integrator", "di_results.json"))
+di = j(os.path.join(C, "di_results.json"))
 p, A, Z = di["parameters"], di["tau_pos"], di["tau_zero"]
 t = []
 t.append(r"""\begin{table}[!t]
