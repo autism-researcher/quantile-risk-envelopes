@@ -1,0 +1,122 @@
+{
+ "parameters": {
+  "X_BAR": 10.0,
+  "BRK": 1.0,
+  "ELL": 0.5,
+  "U_BAR": 2.0,
+  "DELTA": 0.5,
+  "TAU": 0.5,
+  "dt": 0.01,
+  "N": 3000,
+  "alpha": 0.05,
+  "beta": 0.05
+ },
+ "tau_pos": {
+  "calibration": {
+   "B": 0.010656485767823024,
+   "eps_N": 0.024795427851769823,
+   "B_hat_plus": 0.019469571124110577
+  },
+  "analytic": {
+   "level": 0.019469571124110577,
+   "s_b": 0.019090506924353778,
+   "margin_h": 1.9596204437884361,
+   "a_min": 0.019090506924353778,
+   "eta": 0.028635760386530665,
+   "k_bar": 558.7419291134271,
+   "feasibility_requires": "U_BAR - DELTA = 1.5 >= BRK = 1.0: True"
+  },
+  "k0_used": 559,
+  "k0_note": "ceil(k_bar)",
+  "grid": {
+   "max_abs_R_minus_b": 1.5543122344752192e-15,
+   "eta_grid": 0.028635760386530658,
+   "a_min_grid": 0.01909050692435377,
+   "closed_loop_worst": -0.028635760386530658
+  },
+  "random_nominal": {
+   "violations": 1000,
+   "worst": 0.9805304288718051,
+   "wall_crossings": 858
+  },
+  "random_proposed": {
+   "violations": 0,
+   "worst": -0.0018696512251919692,
+   "wall_crossings": 0
+  },
+  "random_cbf_robust": {
+   "violations": 0,
+   "worst": -0.0010420247919097902,
+   "wall_crossings": 0
+  },
+  "adversarial_nominal": {
+   "violations": 1000,
+   "worst": 0.9805304288758412,
+   "wall_crossings": 944
+  },
+  "adversarial_proposed": {
+   "violations": 0,
+   "worst": -0.0018696512251919692,
+   "wall_crossings": 0
+  },
+  "adversarial_cbf_robust": {
+   "violations": 1000,
+   "worst": 2.26685650470404e-05,
+   "wall_crossings": 0
+  }
+ },
+ "tau_zero": {
+  "calibration": {
+   "B": 0.006529277543622089,
+   "eps_N": 0.024795427851769823,
+   "B_hat_plus": 0.011030100584032344
+  },
+  "analytic": {
+   "level": 0.011030100584032344,
+   "s_b": 0.010908437465138475,
+   "margin_h": 2.2480179717149995,
+   "a_min": 0.0,
+   "eta": 0.0,
+   "k_bar": Infinity,
+   "feasibility_requires": "U_BAR - DELTA = 1.5 >= BRK = 1.0: True"
+  },
+  "k0_used": 200,
+  "k0_note": "uncertified (k_bar = inf); 200 used for illustration",
+  "grid": {
+   "max_abs_R_minus_b": 3.382710778154774e-16,
+   "eta_grid": -0.0,
+   "a_min_grid": 0.0,
+   "closed_loop_worst": 0.015312416900775718
+  },
+  "random_nominal": {
+   "violations": 1000,
+   "worst": 0.9889698979426644,
+   "wall_crossings": 858
+  },
+  "random_proposed": {
+   "violations": 1000,
+   "worst": 0.39281272435253456,
+   "wall_crossings": 0
+  },
+  "random_cbf_robust": {
+   "violations": 1000,
+   "worst": 7.721812742609788e-06,
+   "wall_crossings": 0
+  },
+  "adversarial_nominal": {
+   "violations": 1000,
+   "worst": 0.9889698993846199,
+   "wall_crossings": 941
+  },
+  "adversarial_proposed": {
+   "violations": 1000,
+   "worst": 0.48999549372961454,
+   "wall_crossings": 1
+  },
+  "adversarial_cbf_robust": {
+   "violations": 1000,
+   "worst": 2.524800658977415e-05,
+   "wall_crossings": 0
+  }
+ }
+}

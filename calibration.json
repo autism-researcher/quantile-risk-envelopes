@@ -1,0 +1,20 @@
+{
+ "seed": 1000,
+ "N": 3000,
+ "episode_length_s": 60.0,
+ "alpha": 0.05,
+ "beta": 0.05,
+ "B": 0.3737853278906819,
+ "eps_N": 0.024795427851769823,
+ "B_hat_plus": 0.3829212573712498,
+ "margin_at_B_m": 2.5800579799202423,
+ "margin_at_B_hat_plus_m": 2.3858363190735816,
+ "sample_quantiles": {
+  "0.5": 0.15678803625603,
+  "0.9": 0.3594072658950332,
+  "0.95": 0.37378572721226,
+  "0.99": 0.38989633039404914
+ },
+ "baseline_collision_fraction": 0.0,
+ "sampling": "one state per independent episode at a uniformly random time"
+}

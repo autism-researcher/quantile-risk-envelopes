@@ -1,0 +1,99 @@
+{
+ "level_used": "B_hat_plus",
+ "B": 0.3829212573712498,
+ "k0": 436,
+ "k1": 10.0,
+ "mu": 0.05,
+ "gamma_cbf": 5.0,
+ "dt": 0.01,
+ "T": 60.0,
+ "U": [
+  -8.0,
+  4.0
+ ],
+ "delta_v": 1.0,
+ "a_lead": 4.0,
+ "det_nominal": {
+  "max_R_minus_B": 0.13109910862178298,
+  "collision": false
+ },
+ "det_proposed": {
+  "max_R_minus_B": -0.04692887744736224,
+  "collision": false
+ },
+ "det_cbf": {
+  "max_R_minus_B": 0.0718814049920759,
+  "collision": false
+ },
+ "det_cbf_robust": {
+  "max_R_minus_B": -0.009154002717799425,
+  "collision": false
+ },
+ "mc_nominal": {
+  "runs": 1000,
+  "violations": 359,
+  "worst_max_R_minus_B": 0.24657079088847733,
+  "reached_boundary_layer": 0.442,
+  "collisions": 0,
+  "projection_active_fraction": 0.0
+ },
+ "mc_proposed": {
+  "runs": 1000,
+  "violations": 0,
+  "worst_max_R_minus_B": -0.002457427735802542,
+  "reached_boundary_layer": 0.06,
+  "collisions": 0,
+  "projection_active_fraction": 0.0001285
+ },
+ "mc_cbf": {
+  "runs": 1000,
+  "violations": 367,
+  "worst_max_R_minus_B": 0.12246028298064238,
+  "reached_boundary_layer": 0.443,
+  "collisions": 0,
+  "projection_active_fraction": 0.0
+ },
+ "mc_cbf_robust": {
+  "runs": 1000,
+  "violations": 0,
+  "worst_max_R_minus_B": -0.002457427735802542,
+  "reached_boundary_layer": 0.072,
+  "collisions": 0,
+  "projection_active_fraction": 0.0
+ },
+ "adv_nominal": {
+  "runs": 1000,
+  "violations": 1000,
+  "worst_max_R_minus_B": 0.43688027470326096,
+  "reached_boundary_layer": 1.0,
+  "collisions": 1000,
+  "projection_active_fraction": 0.0
+ },
+ "adv_proposed": {
+  "runs": 1000,
+  "violations": 0,
+  "worst_max_R_minus_B": -0.002457427735802542,
+  "reached_boundary_layer": 0.06,
+  "collisions": 0,
+  "projection_active_fraction": 0.0010795
+ },
+ "adv_cbf": {
+  "runs": 1000,
+  "violations": 1000,
+  "worst_max_R_minus_B": 0.18957568654767198,
+  "reached_boundary_layer": 1.0,
+  "collisions": 0,
+  "projection_active_fraction": 0.0
+ },
+ "adv_cbf_robust": {
+  "runs": 1000,
+  "violations": 1000,
+  "worst_max_R_minus_B": 6.683417431890826e-05,
+  "reached_boundary_layer": 1.0,
+  "collisions": 0,
+  "projection_active_fraction": 0.0
+ },
+ "runtime_us_proposed": 33.81554559999813,
+ "runtime_us_cbf": 34.80302704999758,
+ "runtime_us_cbf_robust": 38.55447290000029
+}
