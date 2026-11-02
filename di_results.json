@@ -7,6 +7,7 @@
   "DELTA": 0.5,
   "TAU": 0.5,
   "dt": 0.01,
+  "sim_dt": 0.01,
   "N": 3000,
   "alpha": 0.05,
   "beta": 0.05
@@ -46,7 +47,7 @@
   },
   "random_cbf_robust": {
    "violations": 0,
-   "worst": -0.0010420247919097902,
+   "worst": -0.0010579975045034197,
    "wall_crossings": 0
   },
   "adversarial_nominal": {
@@ -95,12 +96,12 @@
   },
   "random_proposed": {
    "violations": 1000,
-   "worst": 0.39281272435253456,
+   "worst": 0.3934609270466383,
    "wall_crossings": 0
   },
   "random_cbf_robust": {
    "violations": 1000,
-   "worst": 7.721812742609788e-06,
+   "worst": 7.805938268214477e-06,
    "wall_crossings": 0
   },
   "adversarial_nominal": {

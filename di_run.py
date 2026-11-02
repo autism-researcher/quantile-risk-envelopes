@@ -1,9 +1,15 @@
 """Double integrator: calibrate -> analytic certificate (+ grid cross-check) -> simulate.
-Run: python di_run.py   -> di_results.json, di_mc_*.csv, di_traj_*.csv
+Run: python di_run.py              -> di_results.json, di_mc_*.csv, di_traj_*.csv
+     python di_run.py --dt 0.001   -> di_results_dt0.001.json only (time-step refinement of the
+                                      closed-loop runs; calibration and certificate unchanged)
+Seeds: calibration 1000, Monte Carlo initial states 3000, random disturbance 3001 (re-seeded for
+each controller, so all controllers see the same disturbance), deterministic run 2000.
 """
-import json, numpy as np, pandas as pd, di_model as D
+import json, sys, numpy as np, pandas as pd, di_model as D
 
 TAU = 0.5; N = 3000; ALPHA = BETA = 0.05; T_EP = 30.0
+SIM_DT = float(sys.argv[sys.argv.index("--dt") + 1]) if "--dt" in sys.argv else D.DT
+REFINE = "--dt" in sys.argv
 
 def calibrate(tau, seed=1000):
     """One state per independent episode; nominal PD tracking random set-points
@@ -34,20 +40,20 @@ def grid_check(b, tau, k0, n=20001, vmax=20.0):
                 a_min_grid=float(np.abs(a).min()), closed_loop_worst=worst)
 
 def simulate(name, B, tau, k0, x1, x2, rfun, wfun, T=40.0, record=False):
-    n = int(T/D.DT); maxdev = np.full(len(x1), -np.inf); rows = []; viol_wall = np.zeros(len(x1), bool)
+    n = int(round(T/SIM_DT)); maxdev = np.full(len(x1), -np.inf); rows = []; viol_wall = np.zeros(len(x1), bool)
     for i in range(n):
         r = rfun(i)
         if name == "nominal": u = D.u_nominal(x1, x2, r)
         elif name == "proposed": u = D.u_supervisor(x1, x2, r, B, tau, k0)[0]
         else: u = D.u_cbf_robust(x1, x2, r, B, tau)[0]
         R = D.risk_grad(x1, x2, tau)[0]; maxdev = np.maximum(maxdev, R - B)
-        if record: rows.append([i*D.DT, x1[0], x2[0], R[0], u[0]])
-        x1, x2 = D.step(x1, x2, u, wfun(i)); viol_wall |= x1 > D.X_BAR
+        if record: rows.append([i*SIM_DT, x1[0], x2[0], R[0], u[0]])
+        x1, x2 = D.step(x1, x2, u, wfun(i), dt=SIM_DT); viol_wall |= x1 > D.X_BAR
     return maxdev, viol_wall, rows
 
 def main():
     res = {"parameters": dict(X_BAR=D.X_BAR, BRK=D.BRK, ELL=D.ELL, U_BAR=D.U_BAR, DELTA=D.DELTA,
-                              TAU=TAU, dt=D.DT, N=N, alpha=ALPHA, beta=BETA)}
+                              TAU=TAU, dt=D.DT, sim_dt=SIM_DT, N=N, alpha=ALPHA, beta=BETA)}
     for tau, tag in ((TAU, "tau_pos"), (0.0, "tau_zero")):
         cal = calibrate(tau); B = cal["B_hat_plus"]
         an = D.analytic_constants(B, tau)
@@ -61,15 +67,19 @@ def main():
         x1b = D.X_BAR - tau*x2 - x2*np.abs(x2)/(2*D.BRK) - D.h_of_level(B)
         x1 = x1b - rng.uniform(0.05, 5.0, m)
         rT = rng.uniform(D.X_BAR - 1, D.X_BAR + 5, m)
-        for scen, wf in (("random", lambda i, g=np.random.default_rng(3001): g.uniform(-D.DELTA, D.DELTA, m)),
-                         ("adversarial", lambda i: np.full(m, D.DELTA))):
+        def rand_w():                    # fresh generator per controller: common random numbers
+            g = np.random.default_rng(3001)
+            return lambda i: g.uniform(-D.DELTA, D.DELTA, m)
+        def adv_w():
+            return lambda i: np.full(m, D.DELTA)
+        for scen, wmaker in (("random", rand_w), ("adversarial", adv_w)):
             for name in ("nominal", "proposed", "cbf_robust"):
-                md, vw, _ = simulate(name, B, tau, k0, x1.copy(), x2.copy(), lambda i: rT, wf)
+                md, vw, _ = simulate(name, B, tau, k0, x1.copy(), x2.copy(), lambda i: rT, wmaker())
                 entry[f"{scen}_{name}"] = dict(violations=int(np.sum(md > 0)), worst=float(md.max()),
                                                wall_crossings=int(vw.sum()))
-                if tau == TAU and scen == "random":
+                if tau == TAU and scen == "random" and not REFINE:
                     pd.DataFrame({"run": np.arange(m), "max_R_minus_B": md}).to_csv(f"di_mc_{name}.csv", index=False)
-        if tau == TAU:   # deterministic run for figures
+        if tau == TAU and not REFINE:   # deterministic run for figures
             for name in ("nominal", "proposed", "cbf_robust"):
                 g = np.random.default_rng(2000)
                 _, _, rows = simulate(name, B, tau, k0, np.array([0.0]), np.array([0.0]),
@@ -77,7 +87,8 @@ def main():
                                       T=20.0, record=True)
                 pd.DataFrame(rows, columns=["time", "x1", "x2", "risk", "u"]).to_csv(f"di_traj_{name}.csv", index=False)
         res[tag] = entry
-    json.dump(res, open("di_results.json", "w"), indent=1)
+    out = f"di_results_dt{SIM_DT:g}.json" if REFINE else "di_results.json"
+    json.dump(res, open(out, "w"), indent=1)
     print(json.dumps(res, indent=1))
 
 if __name__ == "__main__":

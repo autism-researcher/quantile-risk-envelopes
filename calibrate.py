@@ -1,11 +1,9 @@
-"""Step 1 -- calibrate the risk boundary from independent baseline episodes.
+"""Calibrate the risk level from independent baseline episodes.
 
-Each of N episodes is an independent run of the NOMINAL controller only (no supervisor):
-random safe initial condition (time-headway start), normal lead driving
-(lead acceleration piecewise constant, redrawn every 3 s from U(-2, 1.5) m/s^2),
-uniform disturbance d_v ~ U(-DELTA_V, DELTA_V). One state is sampled per episode at a
-uniformly random time, so the N risk samples are i.i.d. by construction
-(Assumption 2 holds exactly; no temporal subsampling or mixing argument needed).
+Each of N episodes runs the nominal controller only (no supervisor): initial spacing
+5 + 1.5 v + U(0, 30) m, lead acceleration piecewise constant, redrawn every 3 s from
+U(-2, 1.5) m/s^2, disturbance d_v ~ U(-DELTA_V, DELTA_V). One state is sampled per
+episode at a uniformly random time, so the N risk samples are i.i.d. (Assumption 2).
 
 Output: calibration.json  (B = empirical 0.95-quantile, eps_N, B_hat_plus, margins in metres)
 Run:    python calibrate.py
@@ -23,7 +21,7 @@ def main():
     t_sample = rng.integers(0, n, N)
     samples = np.full(N, np.nan)
     collided = np.zeros(N, bool)
-    wl = rng.uniform(-2.0, 1.5, N)
+    wl = rng.uniform(-2.0, 1.5, N)   # overwritten at i = 0; kept so the random stream (and results) are unchanged
     for i in range(n):
         if i % 300 == 0:
             wl = rng.uniform(-2.0, 1.5, N)
@@ -41,7 +39,7 @@ def main():
                B=B, eps_N=eps, B_hat_plus=Bplus,
                margin_at_B_m=float(M.margin_of_level(B)),
                margin_at_B_hat_plus_m=float(M.margin_of_level(Bplus)),
-               sample_quantiles={str(q): float(np.quantile(samples, q)) for q in (0.5, 0.9, 0.95, 0.99)},
+               sample_quantiles={str(q): float(np.quantile(samples, q, method="inverted_cdf")) for q in (0.5, 0.9, 0.95, 0.99)},
                baseline_collision_fraction=float(collided.mean()),
                sampling="one state per independent episode at a uniformly random time")
     json.dump(out, open("calibration.json", "w"), indent=1)

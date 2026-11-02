@@ -1,0 +1,104 @@
+{
+ "level_used": "B_hat_plus",
+ "B": 0.3829212573712498,
+ "k0": 436,
+ "k1": 10.0,
+ "mu": 0.05,
+ "gamma_cbf": 5.0,
+ "dt": 0.001,
+ "T": 60.0,
+ "U": [
+  -8.0,
+  4.0
+ ],
+ "delta_v": 1.0,
+ "a_lead": 4.0,
+ "det_nominal": {
+  "max_R_minus_B": 0.11996567591722429,
+  "collision": false
+ },
+ "det_proposed": {
+  "max_R_minus_B": -0.04867697848235314,
+  "collision": false
+ },
+ "det_cbf": {
+  "max_R_minus_B": 0.06406441704884758,
+  "collision": false
+ },
+ "det_cbf_robust": {
+  "max_R_minus_B": -0.009415455127766537,
+  "collision": false
+ },
+ "mc_nominal": {
+  "runs": 1000,
+  "violations": 348,
+  "worst_max_R_minus_B": 0.23404709257897116,
+  "reached_boundary_layer": 0.438,
+  "collisions": 0,
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 30.04844603855389
+ },
+ "mc_proposed": {
+  "runs": 1000,
+  "violations": 0,
+  "worst_max_R_minus_B": -0.002457427735802542,
+  "reached_boundary_layer": 0.06,
+  "collisions": 0,
+  "projection_active_fraction": 9.543333333333334e-05,
+  "max_ego_speed": 30.04844603855389
+ },
+ "mc_cbf": {
+  "runs": 1000,
+  "violations": 348,
+  "worst_max_R_minus_B": 0.1194931454637288,
+  "reached_boundary_layer": 0.438,
+  "collisions": 0,
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 30.04844603855389
+ },
+ "mc_cbf_robust": {
+  "runs": 1000,
+  "violations": 0,
+  "worst_max_R_minus_B": -0.002457427735802542,
+  "reached_boundary_layer": 0.063,
+  "collisions": 0,
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 30.04844603855389
+ },
+ "adv_nominal": {
+  "runs": 1000,
+  "violations": 1000,
+  "worst_max_R_minus_B": 0.43656872332596797,
+  "reached_boundary_layer": 1.0,
+  "collisions": 1000,
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 29.99989405579652
+ },
+ "adv_proposed": {
+  "runs": 1000,
+  "violations": 0,
+  "worst_max_R_minus_B": -0.002457427735802542,
+  "reached_boundary_layer": 0.06,
+  "collisions": 0,
+  "projection_active_fraction": 0.00011021666666666667,
+  "max_ego_speed": 29.99989405579652
+ },
+ "adv_cbf": {
+  "runs": 1000,
+  "violations": 1000,
+  "worst_max_R_minus_B": 0.18917631093832865,
+  "reached_boundary_layer": 1.0,
+  "collisions": 0,
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 29.99989405579652
+ },
+ "adv_cbf_robust": {
+  "runs": 1000,
+  "violations": 1000,
+  "worst_max_R_minus_B": 6.621819050700584e-06,
+  "reached_boundary_layer": 1.0,
+  "collisions": 0,
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 29.99989405579652
+ }
+}

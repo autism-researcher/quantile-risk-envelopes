@@ -35,7 +35,8 @@
   "worst_max_R_minus_B": 0.24657079088847733,
   "reached_boundary_layer": 0.442,
   "collisions": 0,
-  "projection_active_fraction": 0.0
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 30.135322139230674
  },
  "mc_proposed": {
   "runs": 1000,
@@ -43,23 +44,26 @@
   "worst_max_R_minus_B": -0.002457427735802542,
   "reached_boundary_layer": 0.06,
   "collisions": 0,
-  "projection_active_fraction": 0.0001285
+  "projection_active_fraction": 0.000128,
+  "max_ego_speed": 30.135322139230674
  },
  "mc_cbf": {
   "runs": 1000,
-  "violations": 367,
-  "worst_max_R_minus_B": 0.12246028298064238,
-  "reached_boundary_layer": 0.443,
+  "violations": 359,
+  "worst_max_R_minus_B": 0.12854839194288592,
+  "reached_boundary_layer": 0.442,
   "collisions": 0,
-  "projection_active_fraction": 0.0
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 30.135322139230674
  },
  "mc_cbf_robust": {
   "runs": 1000,
   "violations": 0,
   "worst_max_R_minus_B": -0.002457427735802542,
-  "reached_boundary_layer": 0.072,
+  "reached_boundary_layer": 0.073,
   "collisions": 0,
-  "projection_active_fraction": 0.0
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 30.135322139230674
  },
  "adv_nominal": {
   "runs": 1000,
@@ -67,7 +71,8 @@
   "worst_max_R_minus_B": 0.43688027470326096,
   "reached_boundary_layer": 1.0,
   "collisions": 1000,
-  "projection_active_fraction": 0.0
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 29.999896222004605
  },
  "adv_proposed": {
   "runs": 1000,
@@ -75,7 +80,8 @@
   "worst_max_R_minus_B": -0.002457427735802542,
   "reached_boundary_layer": 0.06,
   "collisions": 0,
-  "projection_active_fraction": 0.0010795
+  "projection_active_fraction": 0.0010795,
+  "max_ego_speed": 29.999896222004605
  },
  "adv_cbf": {
   "runs": 1000,
@@ -83,7 +89,8 @@
   "worst_max_R_minus_B": 0.18957568654767198,
   "reached_boundary_layer": 1.0,
   "collisions": 0,
-  "projection_active_fraction": 0.0
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 29.999896222004605
  },
  "adv_cbf_robust": {
   "runs": 1000,
@@ -91,9 +98,10 @@
   "worst_max_R_minus_B": 6.683417431890826e-05,
   "reached_boundary_layer": 1.0,
   "collisions": 0,
-  "projection_active_fraction": 0.0
+  "projection_active_fraction": 0.0,
+  "max_ego_speed": 29.999896222004605
  },
- "runtime_us_proposed": 33.81554559999813,
- "runtime_us_cbf": 34.80302704999758,
- "runtime_us_cbf_robust": 38.55447290000029
+ "runtime_us_proposed": 34.65647929999989,
+ "runtime_us_cbf": 36.832892550000906,
+ "runtime_us_cbf_robust": 37.30129205000026
 }

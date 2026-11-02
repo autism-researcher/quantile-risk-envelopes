@@ -1,4 +1,4 @@
-"""Vehicle-following example for the IEEE Access revision (consistent with the theory).
+"""Vehicle-following example (Section VIII-B).
 
 State x = [s, v, vl]  (spacing [m], ego speed [m/s], lead speed [m/s]).
 Plant (control-affine, relative degree 1 in the risk):

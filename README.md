@@ -10,9 +10,10 @@ Windows: double-click `run_all.bat`. Other systems, from this folder:
 ```
 python calibrate.py && python certify.py && python simulate.py && python plot.py
 python di_run.py && python di_plot.py
+python simulate.py --dt 0.001 && python di_run.py --dt 0.001
 python make_tables.py
 ```
-Total runtime about one minute on a laptop. LaTeX tables are written to `tables/`.
+Total runtime a few minutes on a laptop (the dt = 0.001 s refinement runs take most of it). LaTeX tables are written to `tables/`.
 
 ## Contents
 | File | Purpose |
@@ -26,11 +27,14 @@ Total runtime about one minute on a laptop. LaTeX tables are written to `tables/
 | `make_tables.py` | Writes the LaTeX tables directly from the JSON results |
 
 ## Settings
-Explicit Euler, time step 0.01 s. Seeds: calibration 1000, deterministic runs 2000, Monte Carlo initial
-conditions 3000, Monte Carlo disturbances 3001. Deployed level: coverage-adjusted empirical quantile
+Explicit Euler, time step 0.01 s (refinement runs: 0.001 s, written to `*_dt0.001.json`).
+Seeds: calibration 1000, deterministic runs 2000, Monte Carlo initial conditions 3000, Monte Carlo
+disturbances 3001, re-seeded for each controller so all controllers see the same disturbance realization. Deployed level: coverage-adjusted empirical quantile
 (alpha = beta = 0.05, N = 3000).
 
 ## Notes
-- The vehicle boundary check is a dense-grid evaluation, not an interval-arithmetic proof.
+- The vehicle boundary check is a dense-grid evaluation on (v, vl) in [0, 35]^2 m/s, not an interval-arithmetic
+  proof. The domain covers the largest ego speed reached in the simulations (`max_ego_speed` in
+  `simulation_summary.json`).
 - Tiny floating-point differences across machines can change the last digits of sub-1e-5 overshoot values
   (e.g. 7.72e-6 vs 8.08e-6); violation counts are unaffected.

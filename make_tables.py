@@ -86,7 +86,8 @@ v.append(r"""
 Controller & Random braking & Adversarial \\ \hline""" % sm["k0"])
 for k, lab in (("nominal", "Nominal ACC"), ("proposed", "Proposed supervisor"), ("cbf", "CBF-QP"), ("cbf_robust", "Robust CBF-QP")):
     v.append(f"{lab} & {vi(sm['mc_'+k])} (${sci(sm['mc_'+k]['worst_max_R_minus_B'])}$) & {vi(sm['adv_'+k])} (${sci(sm['adv_'+k]['worst_max_R_minus_B'])}$) \\\\")
-v.append(r"\hline" "\n" f"\\multicolumn{{3}}{{l}}{{Collisions (adversarial): nominal {sm['adv_nominal']['collisions']}, others 0.}} \\\\")
+others = sum(sm['adv_'+k]['collisions'] for k in ("proposed", "cbf", "cbf_robust"))
+v.append(r"\hline" "\n" f"\\multicolumn{{3}}{{l}}{{Collisions (adversarial): nominal {sm['adv_nominal']['collisions']}, others {others}.}} \\\\")
 v.append(r"\hline" "\n" r"\end{tabular}}" "\n" r"\end{table}")
 open(os.path.join(L, "tables_vehicle.tex"), "w").write("\n".join(v) + "\n")
 print("tables written")

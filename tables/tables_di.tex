@@ -1,0 +1,37 @@
+\begin{table}[!t]
+\caption{Double integrator: calibration and closed-form certificate on $\partial\mathcal{S}$ (grid cross-check in parentheses).}
+\label{tab:di_certificate}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lcc}
+\hline
+Quantity & $\tau=0.5$ & $\tau=0$ \\ \hline
+$B_N$ & $0.0107$ & $0.0065$ \\
+$\widehat B_N^+$ (deployed) & $0.0195$ & $0.0110$ \\
+Margin $h$ on $\partial\mathcal{S}$ & $1.96$ & $2.25$ \\
+$a_{\min}$ & $1.91\times10^{-2}$ ($1.91\times10^{-2}$) & $0$ ($0$) \\
+Feasibility margin $\eta$ & $2.86\times10^{-2}$ ($2.86\times10^{-2}$) & $0$ ($0$) \\
+Gain bound $\bar k=(\Delta u)^2/\eta$ & $558.7$ & $\infty$ \\
+Gain used $k_0$ & $559$ & $200$ (uncertified) \\
+Worst closed-loop $D^+R$ on $\partial\mathcal{S}$ & $-2.86\times10^{-2}$ & $1.53\times10^{-2}$ \\ \hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[!t]
+\caption{Double integrator: envelope violations over $1000$ runs (worst $\max_t[R-\widehat B_N^+]$ in parentheses).}
+\label{tab:di_mc}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{llcc}
+\hline
+$\tau$ & Controller & Random $w$ & Adversarial $w$ \\ \hline
+$0.5$ & Nominal PD & 1000 ($9.81\times10^{-1}$) & 1000 ($9.81\times10^{-1}$) \\
+ & Proposed supervisor & 0 ($-1.87\times10^{-3}$) & 0 ($-1.87\times10^{-3}$) \\
+ & Robust CBF-QP & 0 ($-1.06\times10^{-3}$) & 1000 ($2.27\times10^{-5}$) \\
+\hline
+$0.0$ & Nominal PD & 1000 ($9.89\times10^{-1}$) & 1000 ($9.89\times10^{-1}$) \\
+ & Proposed supervisor & 1000 ($3.93\times10^{-1}$) & 1000 ($4.90\times10^{-1}$) \\
+ & Robust CBF-QP & 1000 ($7.81\times10^{-6}$) & 1000 ($2.52\times10^{-5}$) \\
+\hline
+\end{tabular}}
+\end{table}

@@ -1,5 +1,5 @@
-"""Step 4 -- figures from the CSV/JSON outputs (no recomputation of results except the
-boundary map in fig_certificate, which re-evaluates the certify.py quantities).
+"""Vehicle-following figures from the CSV/JSON outputs. The boundary map (fig_certificate)
+re-evaluates the closed-loop boundary drift on the same grid as certify.py.
 Run: python plot.py"""
 import json, numpy as np, pandas as pd, matplotlib
 matplotlib.use("Agg")
@@ -21,8 +21,7 @@ def main():
     T = {k: pd.read_csv(f"traj_{k}.csv") for k in LAB}
     for col, ylabel, fname in (("risk", "Risk $R(x)$", "fig_risk.pdf"),
                                ("spacing", "Spacing $s$ [m]", "fig_spacing.pdf"),
-                               ("velocity", "Ego speed $v$ [m/s]", "fig_velocity.pdf"),
-                               ("control", "Input $u$ [m/s$^2$]", "fig_control.pdf")):
+                               ("velocity", "Ego speed $v$ [m/s]", "fig_velocity.pdf")):
         fig, ax = plt.subplots()
         for k, d in T.items():
             ax.plot(d.time, d[col], lw=1.1, label=LAB[k], **STY[k])
@@ -33,6 +32,17 @@ def main():
                     alpha=0.6, label="Lead speed")
         ax.set_xlabel("Time [s]"); ax.set_ylabel(ylabel); ax.legend(fontsize=6.5)
         save(fig, fname)
+    # control input: one panel per controller; nominal input in gray for reference
+    fig, axs = plt.subplots(4, 1, sharex=True, figsize=(3.5, 4.6))
+    for ax, k in zip(axs, LAB):
+        if k != "nominal":
+            ax.plot(T["nominal"].time, T["nominal"].control, color="#aaaaaa", lw=0.9)
+        ax.plot(T[k].time, T[k].control, lw=1.0, color=STY[k]["color"])
+        ax.set_ylim(-7, 2.8); ax.set_yticks([2, 0, -3, -6])
+        ax.text(0.98, 0.08, LAB[k], transform=ax.transAxes, ha="right", va="bottom",
+                fontsize=7, fontweight="bold", color=STY[k]["color"])
+    axs[-1].set_xlabel("Time [s]"); fig.supylabel("Input $u$ [m/s$^2$]", fontsize=9)
+    fig.tight_layout(h_pad=0.2); fig.savefig("fig_control.pdf"); plt.close(fig)
     fig, ax = plt.subplots()
     bins = np.linspace(-0.4, 0.3, 57)
     for k in ("nominal", "cbf", "proposed"):
@@ -43,8 +53,8 @@ def main():
     save(fig, "fig_montecarlo_histogram.pdf")
     # boundary certificate map
     cert = json.load(open("certificate.json"))["B_hat_plus"]
-    n = 301
-    v, vl = np.meshgrid(np.linspace(0, 30, n), np.linspace(0, 30, n))
+    n = C.GRID
+    v, vl = np.meshgrid(np.linspace(0, C.VMAX, n), np.linspace(0, C.VMAX, n))
     s = M.margin_of_level(B) + M.S0 + M.H*v + (v*v - vl*vl)/(2*M.BD)
     _, LfR, a, D = M.drift_terms(s, v, vl)
     u = np.clip(M.u_nominal(s, v, vl) - cert["k0_used"]*a, M.U_MIN, M.U_MAX)

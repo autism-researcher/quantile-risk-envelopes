@@ -1,0 +1,41 @@
+\begin{table}[!t]
+\caption{Vehicle following: calibration and boundary certificate at $\widehat B_N^+$ (grid of 328321 boundary points).}
+\label{tab:veh_certificate}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lc}
+\hline
+Quantity & Value \\ \hline
+Baseline episodes $N$ & 3000 \\
+$B_N$ / stopping margin & $0.3738$ / $2.58$~m \\
+$\epsilon_N$ & $0.0248$ \\
+$\widehat B_N^+$ / stopping margin & $0.3829$ / $2.39$~m \\
+$\max\|\nabla R\|$ on $\partial\mathcal{S}$ & $0.427$ \\
+Worst disturbance term $D_{\max}$ & $1.426$ \\
+Nominal drift bound $c_{\mathrm{nom}}$ & $1.241$ \\
+Boundary points where nominal law fails & $88\%$ \\
+Authority $|a(x)|$ range & $[0.0473,\,0.3229]$ \\
+Feasibility margin $\eta$ & $0.3308$ \\
+Gain bound $\bar k$ / $k_0$ used & $435.3$ / $436$ \\
+Worst closed-loop $D^+R$ on $\partial\mathcal{S}$ & $-0.3308$ \\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[!t]
+\caption{Vehicle following: envelope violations over $1000$ runs (worst $\max_t[R-\widehat B_N^+]$ in parentheses); $k_0=436$.}
+\label{tab:veh_mc}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lcc}
+\hline
+Controller & Random braking & Adversarial \\ \hline
+Nominal ACC & 359 ($2.47\times10^{-1}$) & 1000 ($4.37\times10^{-1}$) \\
+Proposed supervisor & 0 ($-2.46\times10^{-3}$) & 0 ($-2.46\times10^{-3}$) \\
+CBF-QP & 359 ($1.29\times10^{-1}$) & 1000 ($1.90\times10^{-1}$) \\
+Robust CBF-QP & 0 ($-2.46\times10^{-3}$) & 1000 ($6.68\times10^{-5}$) \\
+\hline
+\multicolumn{3}{l}{Collisions (adversarial): nominal 1000, others 0.} \\
+\hline
+\end{tabular}}
+\end{table}

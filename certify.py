@@ -1,6 +1,6 @@
-"""Step 2 -- check the hypotheses of the invariance theorem on the deployed boundary.
+"""Check the hypotheses of Theorem 1 on the deployed boundary.
 
-Boundary {R = b} is parametrized exactly by (v, vl) in the operating domain [0,30]^2:
+Boundary {R = b} is parametrized exactly by (v, vl) in the operating domain [0, VMAX]^2:
 s = m_b + S0 + H v + (v^2 - vl^2)/(2 BD), where m_b = margin_of_level(b).
 Computed on a dense grid (GRID x GRID points) -- a numerical grid check, not an
 interval-arithmetic proof.
@@ -15,15 +15,17 @@ Reported constants (all maxima/minima over the boundary grid):
              a u(x) <= min_U a u + (Delta u)^2/k  (coordinatewise clamping, 1-D input here)
   k0_unproj= (c_nom + D_max)/a_min^2           gain condition if projection were inactive
   closed-loop worst = max (L_f R + a u_sup + D) at gain k0 = ceil(k_bar)  (must be <= 0)
+VMAX = 35 m/s covers the speeds reached in the simulations (ego speed slightly exceeds 30 m/s).
 
 Output: certificate.json.   Run: python certify.py   (after calibrate.py)
 """
 import json, math, numpy as np, model as M
 
-GRID = 601
+VMAX = 35.0
+GRID = 701          # 0.05 m/s spacing on [0, VMAX]
 
 def boundary(b, n=GRID):
-    v, vl = np.meshgrid(np.linspace(0, 30, n), np.linspace(0, 30, n))
+    v, vl = np.meshgrid(np.linspace(0, VMAX, n), np.linspace(0, VMAX, n))
     v, vl = v.ravel(), vl.ravel()
     s = M.margin_of_level(b) + M.S0 + M.H*v + (v*v - vl*vl)/(2*M.BD)
     keep = s >= 0
@@ -43,12 +45,12 @@ def check(b, k0=None):
     a_min = float(np.min(np.abs(a)))
     if k0 is None:
         k0 = math.ceil(kbar) if math.isfinite(kbar) else None
-    out = dict(level=b, margin_m=float(M.margin_of_level(b)), grid_points=int(len(s)),
+    out = dict(level=b, margin_m=float(M.margin_of_level(b)), domain_vmax=VMAX, grid_points=int(len(s)),
                max_abs_R_minus_b=float(np.max(np.abs(R - b))),
                G_bd=float(G.max()), D_max=float(D.max()), c_nom=float(nom.max()),
                nominal_unsafe_fraction=float(np.mean(nom + D > 0)),
                a_min=a_min, a_max=float(np.max(np.abs(a))),
-               near_singular_boundary_points=0 if a_min > 0 else int(np.sum(a == 0)),
+               zero_authority_boundary_points=int(np.sum(a == 0)),   # near-singular band is empty for any a_thr < a_min
                eta_feas=eta, input_feasible=bool(eta > 0),
                k_bar=kbar, k0_unprojected=float((nom.max() + D.max())/a_min**2) if a_min > 0 else math.inf,
                k0_used=k0)
@@ -57,7 +59,7 @@ def check(b, k0=None):
         cl = LfR + a*u + D
         out["closed_loop_worst"] = float(cl.max())
         out["closed_loop_ok"] = bool(cl.max() <= 0)
-        # smallest gain on a coarse ladder that passes the direct closed-loop check
+        # smallest gain on a coarse ladder that passes the direct grid check (not covered by Theorem 1)
         for kk in (5, 10, 20, 30, 50, 75, 100, 150, 200, 300, 500, 1000):
             if (LfR + a*np.clip(un - kk*a, M.U_MIN, M.U_MAX) + D).max() <= 0:
                 out["smallest_ladder_gain_passing"] = kk; break

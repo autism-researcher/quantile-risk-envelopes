@@ -13,6 +13,9 @@ python plot.py || goto :fail
 echo === 4/4 Double integrator ===
 python di_run.py > di_run_output.txt || goto :fail
 python di_plot.py || goto :fail
+echo === Time-step refinement (dt = 0.001 s) ===
+python simulate.py --dt 0.001 || goto :fail
+python di_run.py --dt 0.001 > di_run_dt0.001_output.txt || goto :fail
 echo === LaTeX tables ===
 python make_tables.py || goto :fail
 echo.
