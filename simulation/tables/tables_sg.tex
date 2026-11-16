@@ -1,0 +1,51 @@
+\begin{table}[!t]
+\caption{Singular-authority example: boundary certificate at $\widehat B_N^+$ over the
+operating domain $|x_2|\le7$~m/s (400002 grid points).}
+\label{tab:sg_certificate}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lc}
+\hline
+Quantity & Value \\ \hline
+Baseline episodes $N$ & 3000 \\
+$B_N$ / $\widehat B_N^+$ & $0.0112$ / $0.0198$ \\
+$a_{\min}$ on $\partial\mathcal{S}$ & $0$ (at $x_2=-0.90$~m/s) \\
+$\max\|\nabla R\|$ on $\partial\mathcal{S}$ & $0.294$ \\
+Worst disturbance term $D_{\max}$ & $0.146$ \\
+Nominal drift bound $c_{\mathrm{nom}}$ & $0.855$ \\
+\multicolumn{2}{l}{\emph{At the singular point} $a(x)=0$:} \\
+\quad slack of \eqref{eq:case_ii} & $0.00778082$ \\
+\quad drift-only slack $-(L_fR+D)$ & $0.00778082$ \\
+\multicolumn{2}{l}{\emph{Case (ii), Lemma~\ref{lem:proj_feasibility}} (no bound on $\|a\|$ needed):} \\
+\quad $\eta$ on the whole boundary & $0.00774$ \\
+\quad $\bar k$ on the whole boundary & $2067.9$ \\
+\multicolumn{2}{l}{\emph{Case (i), gain condition} \eqref{eq:k_condition}:} \\
+\quad $k_0$ on the whole boundary & $\infty$ \\
+Gain used $k_0=\lceil\bar k\rceil$ & $2068$ \\
+Worst closed-loop $D^+R$ on $\partial\mathcal{S}$ & $-6.86\times10^{-3}$ \\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{table*}[!t]
+\caption{Singular-authority example: envelope violations over 2002 starts placed
+\emph{on} $\partial\mathcal{S}$, with $x_2(0)$ swept through the singular speed
+$V_w$. Worst $\max_t[R-\widehat B_N^+]$ in parentheses; $k_0=2068$. Values at
+$10^{-16}$ and below are floating-point zero, since the runs start at $R=\widehat
+B_N^+$ exactly.}
+\label{tab:sg_boundary}
+\centering\footnotesize
+\begin{tabular}{lcccc}
+\hline
+& \multicolumn{2}{c}{Random $w$} & \multicolumn{2}{c}{Adversarial $w$} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Controller & $\Delta t=10^{-2}$ & $10^{-3}$ & $\Delta t=10^{-2}$ & $10^{-3}$ \\ \hline
+Nominal PD & 2002 (${9.80\times10^{-1}}$) & 2001 (${9.80\times10^{-1}}$) & 2002 (${9.80\times10^{-1}}$) & 2002 (${9.80\times10^{-1}}$) \\
+CBF-QP & 2002 (${4.20\times10^{-3}}$) & 2001 (${1.91\times10^{-3}}$) & 2002 (${1.31\times10^{-2}}$) & 2002 (${1.29\times10^{-2}}$) \\
+Robust CBF-QP & 1 (${2.18\times10^{-7}}$) & 0 (${4.16\times10^{-17}}$) & 1000 (${2.20\times10^{-5}}$) & 1000 (${2.18\times10^{-6}}$) \\
+Proposed supervisor & 2 (${3.92\times10^{-4}}$) & 0 (${4.16\times10^{-17}}$) & 0 (${6.94\times10^{-17}}$) & 0 (${4.16\times10^{-17}}$) \\
+\hline
+\multicolumn{5}{l}{Violation count uses the tolerance $1.00\times10^{-12}$.} \\
+\hline
+\end{tabular}
+\end{table*}

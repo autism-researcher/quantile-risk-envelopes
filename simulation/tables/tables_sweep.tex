@@ -1,0 +1,61 @@
+\begin{table}[!t]
+\caption{Vehicle following: condition~\eqref{eq:case_ii} margin $\eta$ at the calibrated
+level $\widehat B_N^+$ as the braking authority is varied. The baseline is
+re-calibrated at each limit, so $\widehat B_N^+$ is the level implied by nominal
+driving under that same limit.}
+\label{tab:brake_sweep}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{rccc}
+\hline
+$|u_{\min}|$ [m/s$^2$] & $\widehat B_N^+$ & $\eta$ at $\widehat B_N^+$ & Certified \\ \hline
+$10.0$ & $0.3829$ & $0.4253$ & yes \\
+$9.0$ & $0.3829$ & $0.3781$ & yes \\
+$8.0$ & $0.3829$ & $0.3308$ & yes \\
+$7.0$ & $0.3829$ & $0.2836$ & yes \\
+$6.0$ & $0.3829$ & $0.1821$ & yes \\
+$5.5$ & $0.3829$ & $0.1090$ & yes \\
+$5.0$ & $0.3829$ & $0.0256$ & yes \\
+$4.8$ & $0.3829$ & $-0.0103$ & no \\
+$4.6$ & $0.3829$ & $-0.0476$ & no \\
+$4.4$ & $0.3829$ & $-0.0863$ & no \\
+$4.2$ & $0.3829$ & $-0.1261$ & no \\
+$4.0$ & $0.3829$ & $-0.1672$ & no \\
+$3.5$ & $0.3829$ & $-0.2749$ & no \\
+$3.0$ & $0.3829$ & $-0.3894$ & no \\
+$2.5$ & $0.3829$ & $-0.5103$ & no \\
+$2.0$ & $0.3829$ & $-0.6371$ & no \\
+$1.5$ & $0.3861$ & $-0.7720$ & no \\
+\hline
+\multicolumn{4}{l}{Threshold between $4.8$ and $5.0$~m/s$^2$; every failure is condition~\eqref{eq:case_ii},} \\
+\multicolumn{4}{l}{never the closed-loop boundary check.} \\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[!t]
+\caption{Vehicle following: sensitivity of the certificate at $\widehat B_N^+$ to the
+assumed worst-case lead deceleration. Below $6$~m/s$^2$ the binding boundary point has
+$\partial R/\partial v_\ell=0$, so the lead term drops out of $\eta$ there.}
+\label{tab:lead_sweep}
+\centering\footnotesize
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{rcccc}
+\hline
+Lead decel.\ [m/s$^2$] & $D_{\max}$ & $\eta$ & $\bar k$ & Certified \\ \hline
+$2.0$ & $0.874$ & $0.3308$ & $435.3$ & yes \\
+$4.0$ & $1.426$ & $0.3308$ & $435.3$ & yes \\
+$6.0$ & $1.977$ & $0.3308$ & $435.3$ & yes \\
+$7.0$ & $2.253$ & $0.2745$ & $524.5$ & yes \\
+$8.0$ & $2.528$ & $0.1755$ & $820.6$ & yes \\
+$8.5$ & $2.666$ & $0.1008$ & $1428.0$ & yes \\
+$9.0$ & $2.804$ & $0.0192$ & $7502.3$ & yes \\
+$9.5$ & $2.942$ & $-0.0743$ & $\infty$ & no \\
+$10.0$ & $3.080$ & $-0.1757$ & $\infty$ & no \\
+$12.0$ & $3.631$ & $-0.6430$ & $\infty$ & no \\
+$16.0$ & $4.734$ & $-1.7405$ & $\infty$ & no \\
+\hline
+\multicolumn{5}{l}{Certified up to $9.0$~m/s$^2$.} \\
+\hline
+\end{tabular}}
+\end{table}

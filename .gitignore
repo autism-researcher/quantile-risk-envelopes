@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+hardware/results/_cert_tmp*
+*_output.txt

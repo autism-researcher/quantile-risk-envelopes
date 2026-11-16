@@ -1,0 +1,74 @@
+{
+ "n_runs": 27,
+ "longest_loop_period_ms": 41.9,
+ "speed_update_interval_ms": 80.0,
+ "odometry": {
+  "SPD-04-2": {
+   "integrated_m": 3.185,
+   "taped_m": 3.1,
+   "error_pct": 2.74
+  },
+  "SPD-04-3": {
+   "integrated_m": 3.1857,
+   "taped_m": 3.1,
+   "error_pct": 2.76
+  },
+  "SPD-06-1": {
+   "integrated_m": 3.3533,
+   "taped_m": 3.27,
+   "error_pct": 2.55
+  },
+  "SPD-06-2": {
+   "integrated_m": 3.3778,
+   "taped_m": 3.32,
+   "error_pct": 1.74
+  },
+  "SPD-06-3": {
+   "integrated_m": 3.3577,
+   "taped_m": 3.22,
+   "error_pct": 4.28
+  }
+ },
+ "odometry_error_pct_range": [
+  1.74,
+  4.28
+ ],
+ "start_delay_s": {
+  "ACC-06-1": 0.2,
+  "BRK-04-1": 0.64,
+  "BRK-06-1": 0.36,
+  "BRK-08-1": 0.4,
+  "BRKI-06-1": 0.2,
+  "BRKI-06-2": 0.56,
+  "BRKI-06-3": 0.4,
+  "BRKI-06-4": 0.6,
+  "INV-11": 1.24,
+  "INV-12": 0.8,
+  "INV-13": 0.16,
+  "INV-14": 0.48,
+  "INV-15": 0.16,
+  "INV-16": 1.32,
+  "INV-17": 0.36,
+  "INV-18": 0.402,
+  "RND-01": 0.88,
+  "RND-02": 0.24,
+  "RND-03": 0.8,
+  "RND-04": 1.72,
+  "RND-05": 0.48,
+  "SPD-04-1": 0.36,
+  "SPD-04-2": 0.2,
+  "SPD-04-3": 0.2,
+  "SPD-06-1": 0.361,
+  "SPD-06-2": 0.24,
+  "SPD-06-3": 0.24
+ },
+ "start_delay_step_runs_s": [
+  0.2,
+  0.361
+ ],
+ "start_delay_ramped_runs_s": [
+  0.2,
+  0.64
+ ],
+ "note": "random-input runs excluded from the start-delay ranges: their first command is random in size"
+}
